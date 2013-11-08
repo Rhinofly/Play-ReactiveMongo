@@ -37,6 +37,7 @@ object Publish {
   lazy val settings = Seq(
     publishMavenStyle := true,
     publishTo <<= TargetRepository.rhinofly,
+    credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
     licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
