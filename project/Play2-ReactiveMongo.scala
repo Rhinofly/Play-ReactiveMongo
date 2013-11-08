@@ -2,7 +2,7 @@ import sbt._
 import sbt.Keys._
 
 object BuildSettings {
-  val buildVersion = "0.10.0-SNAPSHOT"
+  val buildVersion = "0.10.0-SNAPSHOT.20131108"
 
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.reactivemongo",
@@ -29,10 +29,14 @@ object Publish {
       else
         Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     }
+    def rhinofly: Project.Initialize[Option[sbt.Resolver]] = version { version: String =>
+      val repo = if (version endsWith "SNAPSHOT") "snapshot" else "release"
+      Some("Rhinofly Internal " + repo.capitalize + " Repository" at "http://maven-repository.rhinofly.net:8081/artifactory/libs-" + repo + "-local")
+    }
   }
   lazy val settings = Seq(
     publishMavenStyle := true,
-    publishTo <<= TargetRepository.sonatype,
+    publishTo <<= TargetRepository.rhinofly,
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
     licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),

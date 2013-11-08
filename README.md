@@ -26,10 +26,10 @@ libraryDependencies ++= Seq(
 If you want to use the latest snapshot, add the following instead:
 
 ```scala
-resolvers += "Sonatype Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
+resolvers += "Rhinofly Internal Repository" at "http://maven-repository.rhinofly.net:8081/artifactory/libs-release-local"
 
 libraryDependencies ++= Seq(
-  "org.reactivemongo" %% "play2-reactivemongo" % "0.10.0-SNAPSHOT"
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.10.0-SNAPSHOT.20131108"
 )
 ```
 
